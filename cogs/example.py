@@ -18,8 +18,8 @@ class ExampleCog(commands.Cog):
         self.bot = bot
 
     @commands.command(
-        name="ping",
-        help="The pong to your ping, let's you know that the bot is alive.")
+        name="ping", help="The pong to your ping, let's you know that the bot is alive."
+    )
     async def ping(self, ctx):
         """
         Create a simple ping pong command.

@@ -17,17 +17,11 @@ class FactsCog(commands.Cog):
         """Save our bot argument that is passed in to the class."""
         self.bot = bot
 
-        self.MANAGER_IDS = {
-            'wenger': 51,
-            'unai': 37569,
-            'arteta': 51018
-        }
+        self.MANAGER_IDS = {"wenger": 51, "unai": 37569, "arteta": 51018}
 
-    @commands.command(
-        name="wengersucks"
-    )
+    @commands.command(name="wengersucks")
     async def wengerSucks(self, ctx):
-        with open('wengerSucks.txt', 'r', encoding="utf-8") as f:
+        with open("wengerSucks.txt", "r", encoding="utf-8") as f:
             content = f.read()
 
         for message in content.split("\n\n"):
@@ -35,21 +29,23 @@ class FactsCog(commands.Cog):
 
     @commands.command(
         name="wengerfact",
-        help="Get a random fact about our lord and savior Arsene Wenger.")
+        help="Get a random fact about our lord and savior Arsene Wenger.",
+    )
     async def wengerFact(self, ctx):
-        await ctx.send(embed=await self.getManagerFact('wenger'))
+        await ctx.send(embed=await self.getManagerFact("wenger"))
 
     @commands.command(
-        name="unaifact",
-        help="Get a random fact about our former manager Unai Emery.")
+        name="unaifact", help="Get a random fact about our former manager Unai Emery."
+    )
     async def unaiFact(self, ctx):
-        await ctx.send(embed=await self.getManagerFact('unai'))
+        await ctx.send(embed=await self.getManagerFact("unai"))
 
     @commands.command(
         name="artetafact",
-        help="Get a random fact about our current manager Mikel Arteta")
+        help="Get a random fact about our current manager Mikel Arteta",
+    )
     async def artetaFact(self, ctx):
-        await ctx.send(embed=await self.getManagerFact('arteta'))
+        await ctx.send(embed=await self.getManagerFact("arteta"))
 
     async def getManagerFact(self, manager):
         """
@@ -57,19 +53,18 @@ class FactsCog(commands.Cog):
         :param manager:
         :return:
         """
-        facts = f'facts/{manager}Facts.txt'
+        facts = f"facts/{manager}Facts.txt"
         try:
-            with open(facts, 'r', encoding="utf-8") as f:
+            with open(facts, "r", encoding="utf-8") as f:
                 content = f.readlines()
 
             line = random.choice(content)
-            embed = discord.Embed(
-                description=line,
-                color=0x9C824A)
+            embed = discord.Embed(description=line, color=0x9C824A)
 
             embed.set_author(
                 name=f"{manager.title()} Fact",
-                icon_url=f"https://resources.premierleague.com/premierleague/photos/players/250x250/man{self.MANAGER_IDS[manager]}.png")
+                icon_url=f"https://resources.premierleague.com/premierleague/photos/players/250x250/man{self.MANAGER_IDS[manager]}.png",
+            )
             return embed
         except FileNotFoundError:
             print(f"{getTimestamp()}\nError reading file {facts}")

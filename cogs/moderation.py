@@ -13,7 +13,7 @@ class ModerationCog(commands.Cog):
         """Save our bot argument that is passed in to the class."""
         self.bot = bot
 
-        with open('banned.txt', 'r', encoding="utf-8") as f:
+        with open("banned.txt", "r", encoding="utf-8") as f:
             self.banned = f.read().splitlines()
 
     @commands.Cog.listener()
@@ -21,11 +21,11 @@ class ModerationCog(commands.Cog):
         msgLower = message.content.lower()
         if any(ele in msgLower for ele in self.banned):
             await message.delete()
-            await message.channel.send(f"Sorry {str(message.author)} that source is not allowed.")
+            await message.channel.send(
+                f"Sorry {str(message.author)} that source is not allowed."
+            )
 
-    @commands.command(
-        name="clear",
-        help="Clears messages")
+    @commands.command(name="clear", help="Clears messages")
     @commands.check(lambda ctx: ctx.message.author.id == 193393269068136448)
     async def clear(self, ctx, message_count: int):
         await ctx.channel.purge(limit=message_count + 1)
